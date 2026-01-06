@@ -9,48 +9,48 @@ export default function Navbar() {
 
   // Deteksi scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock scroll saat menu mobile terbuka
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  }, [isOpen]);
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300
-        ${scrolled ? "bg-white backdrop-blur-md" : "bg-transparent"}
+        ${scrolled ? "bg-white/90 backdrop-blur-md" : "bg-transparent"}
       `}
     >
-      <div className="mx-auto flex justify-between items-center px-6 md:px-10 py-4">
+      <div className="flex justify-between items-center px-6 md:px-10 py-4">
         {/* Logo */}
         <img
           src={logo}
           alt="MyCompany Logo"
-          className={`w-20 md:w-28 h-auto object-contain transition-all duration-300
-            ${scrolled ? "brightness-100" : "brightness-100"}
-          `}
+          className="w-20 md:w-28 h-auto object-contain"
         />
 
         {/* Menu desktop */}
         <ul
-          className={`hidden md:flex space-x-8
-            font-sans font-extralight uppercase tracking-widest text-sm
-            transition-colors duration-300
+          className={`hidden md:flex space-x-8 uppercase tracking-widest text-sm
             ${scrolled ? "text-orange-500" : "text-white"}
           `}
         >
-          <li><Link to="/" className="hover:text-orange-600">Home</Link></li>
-          <li><Link to="/portofolio" className="hover:text-orange-600">Portofolio</Link></li>
-          <li><Link to="/services" className="hover:text-orange-600">Services</Link></li>
-          <li><Link to="/about" className="hover:text-orange-600">About</Link></li>
-          <li><Link to="/contact" className="hover:text-orange-600">Contact</Link></li>
+          {["Home", "Portofolio", "Services", "About", "Contact"].map((item) => (
+            <li key={item}>
+              <Link to={`/${item === "Home" ? "" : item.toLowerCase()}`} className="hover:text-orange-600">
+                {item}
+              </Link>
+            </li>
+          ))}
         </ul>
 
-        {/* Tombol hamburger */}
+        {/* Hamburger */}
         <button
-          className="md:hidden focus:outline-none transition-colors duration-300"
+          className="md:hidden"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
@@ -61,17 +61,30 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Menu mobile */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white/90 backdrop-blur-lg absolute top-full left-0 w-full shadow-lg">
-          <ul className="flex flex-col items-center space-y-5 py-6
-                         font-sans font-extralight uppercase tracking-widest text-sm text-orange-500">
-            <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
-            <li><Link to="/portofolio" onClick={() => setIsOpen(false)}>Portofolio</Link></li>
-            <li><Link to="/services" onClick={() => setIsOpen(false)}>Services</Link></li>
-            <li><Link to="/about" onClick={() => setIsOpen(false)}>About</Link></li>
-            <li><Link to="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
-          </ul>
+        <div
+          className="
+            fixed inset-0 z-40
+            bg-white/95 backdrop-blur-lg
+            md:hidden
+            flex flex-col items-center justify-center
+            space-y-6
+            uppercase tracking-widest text-sm text-orange-500
+            orientation-landscape:justify-start
+            orientation-landscape:pt-20
+            overflow-y-auto
+          "
+        >
+          {["Home", "Portofolio", "Services", "About", "Contact"].map((item) => (
+            <Link
+              key={item}
+              to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+              onClick={() => setIsOpen(false)}
+            >
+              {item}
+            </Link>
+          ))}
         </div>
       )}
     </nav>
