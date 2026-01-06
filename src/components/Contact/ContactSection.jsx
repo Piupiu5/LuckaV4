@@ -53,10 +53,10 @@ const ContactSection = () => {
 
         {/* Alamat */}
         <div className="md:col-span-2 lg:col-span-3 mt-6">
-          <h3 className="text-lg font-semibold mb-3">ALAMAT</h3>
+          <h3 className="text-lg text-white font-semibold mb-3">ALAMAT</h3>
           <div className="flex items-start gap-3">
-            <MapPin className="text-orange-500 w-6 h-6 mt-1" />
-            <p className="text-gray-700 leading-relaxed">
+            <MapPin className="text-white w-6 h-6 mt-1" />
+            <p className="text-white leading-relaxed">
               Jl. Sedati Agung 1 No.48 4/2 Sedati - Sidoarjo, Jawa Timur 61253
             </p>
           </div>

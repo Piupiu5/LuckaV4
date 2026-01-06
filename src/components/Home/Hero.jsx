@@ -3,23 +3,28 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Hero() {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 300], [0, 80]);
+  const y = useTransform(scrollY, [0, 300], [0, 60]);
 
   return (
-    <section className="relative h-screen overflow-hidden flex items-center justify-center bg-black">
-      <motion.video
-        className="
-        absolute inset-0 w-full h-full
-        object-contain
-        orientation-landscape:object-cover
-        md:object-cover"
+    <section className="relative min-h-screen pt-16 bg-black overflow-hidden">
+      <motion.div
         style={{ y }}
-        src={heroVideo}
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+        className="absolute inset-0 will-change-transform"
+      >
+        <video
+          className="
+            w-full h-full
+            object-contain
+            orientation-landscape:object-cover
+            md:object-cover
+          "
+          src={heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      </motion.div>
     </section>
   );
 }
