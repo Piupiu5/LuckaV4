@@ -8,7 +8,12 @@ export default function Hero() {
   return (
     <section className="relative h-screen overflow-hidden flex items-center justify-center bg-black">
       <motion.video
-        className="absolute inset-0 w-full h-full object-contain md:object-cover"
+        className="
+          absolute inset-0 w-full h-full
+          object-contain
+          orientation-landscape:object-cover
+          md:object-cover
+        "
         style={{ y }}
         src={heroVideo}
         autoPlay
