@@ -1,13 +1,19 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+const MotionLink = motion(Link);
+
 export default function Package() {
   return (
-    <section className="bg-white py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section className="bg-white py-16 sm:py-20 px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto text-left">
+        
         {/* Judul */}
         <motion.h2
-          className="text-6xl font-bold mb-4 mt-20"
+          className="
+            text-4xl sm:text-5xl md:text-6xl 
+            font-bold mb-4
+          "
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -19,7 +25,7 @@ export default function Package() {
 
         {/* Subjudul */}
         <motion.p
-          className="font-semibold text-gray-800 mb-3"
+          className="font-semibold text-gray-800 mb-3 text-base sm:text-lg"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
@@ -30,7 +36,7 @@ export default function Package() {
 
         {/* Deskripsi */}
         <motion.p
-          className="text-gray-600 leading-relaxed mb-6"
+          className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
@@ -43,21 +49,30 @@ export default function Package() {
 
         {/* Harga */}
         <motion.div
+          className="mb-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-700 font-medium mb-1">Harga Mulai dari</p>
-          <p className="text-3xl font-extrabold text-orange-500">
+          <p className="text-gray-700 font-medium mb-1 text-sm">
+            Harga mulai dari
+          </p>
+          <p className="text-2xl sm:text-3xl font-extrabold text-orange-500">
             Rp 4.500.000
           </p>
         </motion.div>
 
         {/* Tombol */}
-        <motion.a
-          
-          className="inline-block bg-orange-500 text-white font-semibold mt-5 py-3 px-6 rounded-full hover:bg-orange-600 transition duration-300"
+        <MotionLink
+          to="/allservice"
+          className="
+            inline-block
+            bg-orange-500 text-white font-semibold
+            py-3 px-6 rounded-full
+            transition duration-300
+            hover:bg-orange-600
+          "
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
           initial={{ opacity: 0 }}
@@ -65,8 +80,9 @@ export default function Package() {
           transition={{ duration: 0.7, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <Link to="/allservice" className="hover:text-black">Lihat Paket Lainnya</Link>
-        </motion.a>
+          Lihat Paket Lainnya
+        </MotionLink>
+
       </div>
     </section>
   );
